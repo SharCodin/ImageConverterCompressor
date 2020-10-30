@@ -28,7 +28,7 @@ if not listOfFiles:
 
 
 # Path to save images
-destinationFolder = os.path.join(imagesDir, "Resized")
+destinationFolder = os.path.join(imagesDir, "Compressed")
 if not os.path.exists(destinationFolder):
     os.mkdir(destinationFolder)
 
