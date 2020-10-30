@@ -11,10 +11,23 @@ from PIL import Image
 imagesDir = filedialog.askdirectory()
 
 
+def get_size(start_path):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(start_path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            # skip if it is symbolic link
+            if not os.path.islink(fp):
+                total_size += os.path.getsize(fp)
+
+    return total_size
+
+
 # if no directory selected, user cancel or quit the dialog box.
 if not imagesDir:
     sys.exit("No directory selected.")
 
+InitialSize = get_size(imagesDir)
 
 # list all files in directory and apped to a list
 listOfFiles = []
@@ -42,6 +55,7 @@ if not os.path.exists(destinationFolder):
 
 # loop through images and convert or compress file.
 print('Compressing images...')
+totalFiles = 0
 for imgFile in listOfFiles:
     imgFullPath = os.path.join(imagesDir, imgFile)
     im = Image.open(imgFullPath)
@@ -49,10 +63,16 @@ for imgFile in listOfFiles:
     img = im.resize((imageWidth, imageHeight), PIL.Image.ANTIALIAS)
     destinationFileName = os.path.join(destinationFolder, imgFile)
     img.save(destinationFileName)
+    totalFiles += 1
 
+FinalSize = get_size(destinationFolder)
 
 # completed
-print('=======================================')
 print('==============COMPLETED================')
+print()
+print('================STATS==================')
+print(f'Total Files Processed: {totalFiles} files.')
+print(f'File Size before compression: {InitialSize} bytes.')
+print(f'File Size After compression: {FinalSize} bytes.')
 print('=======================================')
 input('Press ENTER to exit')
