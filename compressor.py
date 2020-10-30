@@ -31,7 +31,7 @@ InitialSize = get_size(imagesDir)
 
 # list all files in directory and apped to a list
 listOfFiles = []
-filetypes = ['.jpg', '.jpeg', '.png', '.gif']
+filetypes = ['.jpg', '.jpeg', '.png', '.gif', '.PNG', '.JPG', 'JPEG', 'GIF']
 print('Getting image files...')
 for name in os.listdir(imagesDir):
     filePath = os.path.join(imagesDir, name)
