@@ -1,4 +1,3 @@
-from os import startfile
 from PIL import Image
 import PIL
 import os
@@ -8,7 +7,7 @@ import datetime
 
 startTimer = Timer()
 
-base_im_width = 2400
+base_im_width = 1800
 base_im_height = 1350
 ratio = 1.00
 
@@ -19,14 +18,17 @@ for dirpaths, dirnames, filenames in os.walk(source_path):
         if '.jpg' in filename.lower() or '.png' in filename.lower():
             im = Image.open(os.path.join(dirpaths, filename))
             im_width, im_height = im.size
-            if im_width >= im_height:
-                ratio = base_im_width / im_width
+            if im_width >= base_im_width and im_height >= im_height:
+                if im_width <= im_height:
+                    ratio = base_im_width / im_width
+                else:
+                    ratio = base_im_height / im_height
             else:
-                ratio = base_im_height / im_height
+                ratio = 1.00
             new_im_width = int(ratio * im_width)
             new_im_height = int(ratio * im_height)
             resized_image = im.resize((new_im_width, new_im_height), PIL.Image.ANTIALIAS)
-            resized_image.save(os.path.join(dirpaths, 'resized_' + filename))
+            resized_image.save(os.path.join(dirpaths, '_' + filename))
             os.remove(os.path.join(dirpaths, filename))
 
 stopTimer = Timer()
