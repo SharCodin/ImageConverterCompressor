@@ -7,8 +7,8 @@ import datetime
 
 startTimer = Timer()
 
-base_im_width = 1800
-base_im_height = 1350
+base_im_width = 1600
+base_im_height = 1000
 ratio = 1.00
 
 source_path = filedialog.askdirectory()
@@ -29,6 +29,7 @@ for dirpaths, dirnames, filenames in os.walk(source_path):
             new_im_height = int(ratio * im_height)
             resized_image = im.resize((new_im_width, new_im_height), PIL.Image.ANTIALIAS)
             resized_image.save(os.path.join(dirpaths, '_' + filename))
+            im.close()
             os.remove(os.path.join(dirpaths, filename))
 
 stopTimer = Timer()
