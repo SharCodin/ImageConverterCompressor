@@ -1,10 +1,12 @@
-from PIL import Image
-import PIL
-import os
-from tkinter import filedialog
-from timeit import default_timer as Timer
-import datetime
 import concurrent.futures as cf
+import datetime
+import os
+from timeit import default_timer as Timer
+from tkinter import filedialog
+
+import PIL
+from PIL import Image
+
 
 def resizerCore(image):
 
