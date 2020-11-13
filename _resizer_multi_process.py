@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     list_of_images = []
     source_path = filedialog.askdirectory()
-    for dirpaths, dirnames, filenames in os.walk(source_path):
+    for dirpaths, _, filenames in os.walk(source_path):
         print(dirpaths)
         for filename in filenames:
             if '.jpg' in filename.lower() or '.png' in filename.lower():
